@@ -7,10 +7,12 @@ class TicTacToe {
 
     // The current player on turn.
     private Players _playerOnTurn = Players.None;
+
     // The values of the grid.
     // Key(Integer): number of a cell in the grid.
     // Value(String): the actual value as displayed visually in the grid.
     private Map<Integer, String> _gridValues;
+
     private Set<Integer> _remainingMoves;
 
     TicTacToe(){
