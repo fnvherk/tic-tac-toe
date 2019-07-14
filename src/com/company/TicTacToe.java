@@ -104,14 +104,14 @@ class TicTacToe {
         SetNextPlayer();
 
         if(_playerOnTurn == Players.Human){
-            MakePlayerTurn();
+            MakeHumanTurn();
         }else if(_playerOnTurn == Players.Computer){
             MakeComputerTurn();
         }
     }
 
-    private void MakePlayerTurn(){
-        System.out.println("Player's turn.");
+    private void MakeHumanTurn(){
+        System.out.println("Human's turn.");
         boolean madeTurn = false;
 
         while(!madeTurn){
