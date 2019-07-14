@@ -11,8 +11,8 @@ class TicTacToe {
     }
 
     private enum PlayerChecks {
-        X, // Human
-        O  // Computer
+        x, // Human
+        o  // Computer
     }
 
     private Players _playerOnTurn = Players.None;
@@ -26,7 +26,9 @@ class TicTacToe {
     // Set who is playing first.
     private void SetNextPlayer(){
         if(_playerOnTurn == Players.None){
-            _playerOnTurn = Players.Human;
+            List<Players> players = Arrays.asList(Players.values());
+            Collections.shuffle(players);
+            _playerOnTurn = players.get(0);
         } else{
             if (_playerOnTurn == Players.Computer){
                 _playerOnTurn = Players.Human;
@@ -40,7 +42,7 @@ class TicTacToe {
     private void SetupGrid(){
         _gridValues = new HashMap<>();
 
-        for (int i = 1; i < Math.pow(3, 2) + 1; i++){
+        for (int i = 1; i < 10; i++){
             _gridValues.put(i, String.valueOf(i));
         }
     }
@@ -88,7 +90,7 @@ class TicTacToe {
         HashMap<Integer, String> availableChoices = new HashMap<>(_gridValues);
 
         for (Map.Entry<Integer, String> choice : _gridValues.entrySet()) {
-            if(choice.getValue().equals(PlayerChecks.X.toString()) || choice.getValue().equals(PlayerChecks.O.toString())){
+            if(choice.getValue().equals(PlayerChecks.x.toString()) || choice.getValue().equals(PlayerChecks.o.toString())){
                 availableChoices.remove(choice.getKey());
             }
         }
@@ -116,7 +118,7 @@ class TicTacToe {
                 int playersDecision = scanner.nextInt();
 
                 if(availableChoices.contains(playersDecision)){
-                    _gridValues.replace(playersDecision, PlayerChecks.X.toString());
+                    _gridValues.replace(playersDecision, PlayerChecks.x.toString());
                     madeTurn = true;
                 } else {
                     throw new InputMismatchException();
@@ -130,7 +132,7 @@ class TicTacToe {
     private void MakeComputerTurn(List<Integer> availableChoices){
         Collections.shuffle(availableChoices);
         int decision = availableChoices.get(0);
-        _gridValues.replace(decision, PlayerChecks.O.toString());
+        _gridValues.replace(decision, PlayerChecks.o.toString());
         System.out.println("Computer chose: " + decision + ".");
     }
 
@@ -139,9 +141,9 @@ class TicTacToe {
         List<Integer> computerMarks = new ArrayList<>();
 
         for (int i = 1; i <= _gridValues.size(); i++){
-            if(_gridValues.get(i).equals(PlayerChecks.X.toString())){
+            if(_gridValues.get(i).equals(PlayerChecks.x.toString())){
                humanMarks.add(i);
-            } else if(_gridValues.get(i).equals(PlayerChecks.O.toString())){
+            } else if(_gridValues.get(i).equals(PlayerChecks.o.toString())){
                 computerMarks.add(i);
             }
         }
